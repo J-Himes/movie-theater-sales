@@ -1,10 +1,13 @@
 import java.sql.*;
 import java.util.Scanner;
+import java.nio.file.*;
 
 public class QueryProgram {
-    public static void main(String[] args) {
-        String projectDir = System.getProperty("user.dir");
-        String filePath = "jdbc:sqlite:" + projectDir + "/databases/movie_theater_sales.db";
+    public static void main(String[] args) throws ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
+        Path currentDir = Paths.get(System.getProperty("user.dir"));
+        Path dbPath = currentDir.resolve("databases/movie_theater_sales.db");
+        String filePath = "jdbc:sqlite:" + dbPath.toAbsolutePath();
         Scanner scan = new Scanner(System.in);
         String userInput;
 
